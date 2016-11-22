@@ -11,12 +11,10 @@ session_start();
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Online book store</title>
+<title>Shoes Store - FAQs</title>
 <meta name="keywords" content="" />
 <meta name="description" content="" />
 <link href="templatemo_style.css" rel="stylesheet" type="text/css" />
-
-<link rel="stylesheet" href="nivo-slider.css" type="text/css" media="screen" />
 
 <link rel="stylesheet" type="text/css" href="css/ddsmoothmenu.css" />
 
@@ -54,8 +52,7 @@ ddsmoothmenu.init({
     	<div id="site_title"><h1><a href="#">Online Book Store</a></h1></div>
         <div id="header_right">
         	<p>
-            
-	       <?php
+	         <?php
 								//neu nguoi dung da dang nhap
 								if(isset($_SESSION["user"]) && ($_SESSION["user"]->MaKH != NULL || $_SESSION["user"]->MaNV != NULL ))
 								{ 
@@ -89,7 +86,8 @@ ddsmoothmenu.init({
         <div class="cleaner"></div>
     </div> <!-- END of templatemo_header -->
     
-    <div id="templatemo_menubar">
+    
+      <div id="templatemo_menubar">
     	<div id="top_nav" class="ddsmoothmenu">
             <ul>
                 <li><a href="index.php" class="selected">Trang chủ</a></li>
@@ -102,36 +100,37 @@ ddsmoothmenu.init({
                 <li><a href="lienhe.php">Liên hệ</a></li>
             </ul>
             <br style="clear: left" />
-        </div> <!-- end of ddsmoothmenu -->
-        <div id="templatemo_search">
+        </div> <!-- end of ddsmoothmenu -->  <div id="templatemo_search">
             <form action="#" method="get">
               <input type="text" value=" " name="keyword" id="keyword" title="keyword" onfocus="clearText(this)" onblur="clearText(this)" class="txt_field" />
               <input type="submit" name="Search" value=" " alt="Search" id="searchbutton" title="Search" class="sub_btn"  />
             </form>
         </div>
-    </div> <!-- END of templatemo_menubar -->
+        </div> <!-- END of templatemo_menubar -->
     
-   <div id="templatemo_main">
+    <div id="templatemo_main">
     	<div id="sidebar" class="float_l">
         	<div class="sidebar_box"><span class="bottom"></span>
             	<h3>DANH MỤC SÁCH</h3>   
                 <div class="content"> 
                 	<ul class="sidebar_list">
-                    	<li class="first"><a href="index.php?ten=SGK">SÁCH GIÁO KHOA</a></li>
+                    	<li class="first"><a href="#">SÁCH GIÁO KHOA</a>
+                        	</li>
+                        <li><a href="#">SÁCH TIẾNG ANH</a>
+                        	</li>
+                       <li><a href="#">SÁCH THAM KHẢO</a>
+                        	</li> 
+                        <li><a href="#">TRUYỆN</a>
+                       		</li>
                         
-            	
-                        <li><a href="index.php?ten=AV">SÁCH TIẾNG ANH</a> </li>
-                        		
-                        <li><a href="index.php?ten=TKHAO">SÁCH THAM KHẢO</a>	</li>
-               
-                        <li><a href="index.php?ten=TR">TRUYỆN</a> </li>
-                       	
-                        <li class="last"><a href="index.php?ten=TDIEN">TỪ ĐIỂN</a> </li>  
+                        <li class="last"><a href="#">TỪ ĐIỂN</a>
+                        	</li>
+                        
                     </ul>
                 </div>
             </div>
             <div class="sidebar_box"><span class="bottom"></span>
-            	<h3>SÁCH BÁN CHẠY </h3>   
+            	<h3>SÁCH BÁN CHẠY </h3>     
                 <div class="content"> 
                 	<div class="bs_box">
                     	<a href="#"><img src="images/templatemo_image_01.jpg" alt="image" /></a>
@@ -160,94 +159,32 @@ ddsmoothmenu.init({
                 </div>
             </div>
         </div>
-        <div id="content" class="float_r">
-        	<div id="slider-wrapper">
-                <div id="slider" class="nivoSlider">
-                    <img src="../../../../../wamp/www/BanSach/HinhAnh/moi.jpg" alt="" height= "300" width="620" />
-                    <a href="#"><img src="../HinhAnh/doremon.jpg" alt="" width="620" height="300" title="This is an example of a caption" /></a>
-                    <img src="../HinhAnh/truyen av.jpg" alt="" height="300" width="620" />
-                    <img src="../HinhAnh/ng nh anh.jpg" alt="" height="300" width="620" title="#htmlcaption" />
-                </div>
-                <div id="htmlcaption" class="nivo-html-caption">
-                    <strong>This</strong> is an example of a <em>HTML</em> caption with <a href="#">a link</a>.
-                </div>
-            </div>
-          <script type="text/javascript" src="js/jquery-1.4.3.min.js"></script>
-          <script type="text/javascript" src="js/jquery.nivo.slider.pack.js"></script>
-          <script type="text/javascript">
-            $(window).load(function() {
-                $('#slider').nivoSlider();
-            });
-            </script>
-        	<h1>CÁC SẢN PHẨM</h1>
-            <?php 
-			include_once("DataBase/Sach.php");
-			$sach=new Sach();/*goi class*/
-			$ab=$sach->getsach();/*goi ham*/
-			foreach ($ab as $r)
-			{
-				$hinh=$r["Image"];
-				$ten=$r["TenSach"];
-				$giaban=$r["GiaBan"];
-				
-				echo " <div class='product_box'>
-              <h3>$ten </h3>
-            	<a href='productdetail.html'><img src='HinhAnh/$hinh' alt='Book 1' width='180'height='281' /></a>
-               
-              <p>$giaban</p>
-                <a href='shoppingcart.html' class='addtocart'>Giỏ hàng</a>
-                <a href='productdetail.html' class='detail'>Liên hệ</a>
-          </div> ";       	
-			}
-			?>
-          <!--  <div class="product_box">
-              <h3>Sách hay </h3>
-            	<a href="productdetail.html"><img src="../HinhAnh/top 5 cuon sach tieng anh hay khong the bo qua 1.jpg" alt="Book 1" width="180" height="281" /></a>
-               
-              <p>100 000</p>
-                <a href="shoppingcart.html" class="addtocart">Giỏ hàng</a>
-                <a href="productdetail.html" class="detail">Liên hệ</a>
-          </div>        	
-          <div class="product_box">
-       	    <h3>Ngữ pháp tiếng anh</h3>
-       	    <a href="productdetail.html"><img src="../HinhAnh/971424_603109259755882_1789425.jpg" alt="Book 2" width="180" height="280" /></a> 
-   	        <p>200 000</p>
-                <a href="shoppingcart.html" class="addtocart">Giỏ hàng</a>
-                <a href="productdetail.html" class="detail">Liên hệ</a>
-            </div>        	
-            <div class="product_box no_margin_right">
-           	  <h3>Doremon tập 6</h3>
-            	<a href="productdetail.html"><img src="../HinhAnh/dormon.jpg" alt="Book 3" width="180" height="280" /></a>
-              <p>30 000</p>
-                <a href="shoppingcart.html" class="addtocart">Giỏ hàng</a>
-                <a href="productdetail.html" class="detail">Liên hệ</a>
-            </div>   
+        <div id="content" class="float_r faqs">
+        	<h1>Câu hỏi thường gặp</h1>
+            <h5>Làm thế nào để tôi biết nếu đơn hàng của tôi đã được đặt ở đâu?</h5>
+            <p>Bạn sẽ nhận được một email xác nhận đặt hàng của bạn đã được nhận. Nếu bạn không nhận được một email xác nhận, xin vui lòng đăng nhập để xem tình trạng đơn hàng của bạn. 
+             <a href="http://validator.w3.org/check?uri=referer" rel="nofollow"></a> 
+             <a href="http://jigsaw.w3.org/css-validator/check/referer" rel="nofollow"></a></p>
             
-          <div class="cleaner"></div>
-                 	
-<div class="product_box">
-       	  <h3>Từ điển</h3>
-           	<a href="productdetail.html"><img src="../HinhAnh/100526.jpg" alt="Book 4" width="198" height="280" /></a>
-         <p>178 000</p>
-                <a href="shoppingcart.html" class="addtocart">Giỏ hàng</a>
-                <a href="productdetail.html" class="detail">Liên hệ</a>
-          </div>        	
-            <div class="product_box">
-              <h3>Truyện</h3>
-            	<a href="productdetail.html"><img src="../HinhAnh/ng nh anh.jpg" alt="Book 5" width="204" height="280" /></a>
-                <p>45 000</p>              
-                 <a href="shoppingcart.html" class="addtocart">Giỏ hàng</a>
-                  <a href="productdetail.html" class="detail">Liên hệ</a>
-          </div>        	
-            <div class="product_box no_margin_right">
-           	  <h3>Bộ sách giáo khoa lớp 5</h3>
-           	  <a href="productdetail.html"><a href="productdetail.html"><a href="productdetail.html"></a><a href="productdetail.html"><img src="../HinhAnh/bo_sach_giao_khoa_lop_5_nam_2014.jpeg" alt="Shoes 6" width="190" height="280" /></a>
-             <p>89 000</p>
-           	  <p class="product_price"><a href="shoppingcart.html" class="addtocart">Giỏ hàng</a>
-                <a href="productdetail.html" class="detail">Liên hệ</a>     
-                         </p>
-            </div> -->       	
-        </div>
+          <h5>Khi nào đơn hàng của tôi sẽ được vận chuyển?</h5>
+            <p>Xin vui lòng đọc chính sách vận chuyển của chúng tôi. Nhấn vào<a href="#">đây</a></p>
+            
+            <h5>Phương thức thanh tóan nào được chấp nhận?</h5>
+            <p>Thanh toán trực tiếp hay thẻ </p>
+            
+            <h5>Tôi có thể trả lại hoặc trao đổi mua bán của tôi nếu tôi không thích nó?</h5>
+            
+            <p>Xin vui lòng đọc chính sách trao đổi của chúng tôi. Nhấn vào  <a href="#">đây</a></p>
+            
+            <h5>Làm thế nào để tôi biết nếu đặt hàng trực tuyến được đảm bảo?</h5>
+            <p>
+            Bảo vệ thông tin của bạn là ưu tiên hàng đầu cho trang web này. Chúng tôi sử dụng Secure Sockets Layer (SSL) mã hóa số thẻ tín dụng, tên và địa chỉ của bạn, vì vậy chỉ trang web này có thể giải mã thông tin của bạn.
+            </p>
+       
+            <h5>Chính sách bảo mật của bạn là gì?</h5>
+            <p>Trang web này tôn trọng sự riêng tư của bạn và đảm bảo rằng bạn hiểu những thông tin chúng tôi cần để hoàn thành đơn đặt hàng, và những thông tin bạn có thể chọn để chia sẻ với chúng tôi và với các đối tác tiếp thị của chúng tôi. Để biết thông tin đầy đủ về chính sách bảo mật của chúng tôi, vui lòng truy cập của chúng tôi Chính sách bảo mật trang.</a> 
+            </p>
+        </div> 
         <div class="cleaner"></div>
     </div> <!-- END of templatemo_main -->
     

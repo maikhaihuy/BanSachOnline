@@ -91,14 +91,14 @@ ddsmoothmenu.init({
     <div id="templatemo_menubar">
     	<div id="top_nav" class="ddsmoothmenu">
             <ul>
-                <li><a href="index.html" class="selected">Trang chủ</a></li>
-                <li><a href="sanpham.html">Sản phẩm</a>
+                <li><a href="index.php" class="selected">Trang chủ</a></li>
+                <li><a href="sanpham.php">Sản phẩm</a>
                 </li>
-                <li><a href="thongtincuahang.html">Giới thiệu</a>
+                <li><a href="gioithieu.php">Giới thiệu</a>
                 </li>
-                <li><a href="hoidap.html">Hỏi-đáp</a></li>
-                <li><a href="kiemtradonhang.html">Đơn hàng</a></li>
-                <li><a href="lienhe.html">Liên hệ</a></li>
+                <li><a href="hoidap.php">Hỏi-đáp</a></li>
+                <li><a href="donhang.php">Đơn hàng</a></li>
+                <li><a href="lienhe.php">Liên hệ</a></li>
             </ul>
             <br style="clear: left" />
         </div> <!-- end of ddsmoothmenu -->
@@ -116,70 +116,40 @@ ddsmoothmenu.init({
             	<h3>DANH MỤC SÁCH</h3>   
                 <div class="content"> 
                 	<ul class="sidebar_list">
-                    	<li class="first"><a href="index.php?ten=SGK">SÁCH GIÁO KHOA</a>
-                         <ul>
-                        <li><a href="#submenu1">Bộ SGK lớp 3</a></li>
-                        <li><a href="#submenu2">Bộ SGK lớp 4</a></li>
-                      
-                  </ul> 	</li>
-                        <li><a href="index.php?ten=AV">SÁCH TIẾNG ANH</a>
-                         <ul>
-                        <li><a href="#submenu1">Harry Potter</a></li>
-                        <li><a href="#submenu2">Perfect</a></li>
-                      
-                  </ul> 		</li>
-                        <li><a href="index.php?ten=TKHAO">SÁCH THAM KHẢO</a>
-                        <ul>
-                        <li><a href="#submenu1">Đề thi AV</a></li>
-                        <li><a href="#submenu2">Hướng dẫn làm văn miêu tả</a></li>
-
-                  </ul> 	</li> 
-                        <li><a href="index.php?ten=TR">TRUYỆN</a>
-                        <ul>
-                        <li><a href="#submenu1">Cây bút thần kì</a></li>
-                        <li><a href="#submenu2">Doremon tập 6</a></li>
-                        <li><a href="#submenu3">Bảy bước tới mùa hè </a></li>
-                        <li><a href="#submenu2">Tôi thấy hoa vàng trên cỏ xanh</a></li>
-                      
-                  </ul> 	</li>
+                    	<li class="first"><a href="index.php?ten=SGK">SÁCH GIÁO KHOA</a></li>
                         
-                        <li class="last"><a href="index.php?ten=TDIEN">TỪ ĐIỂN</a>
-                        <ul>
-                        <li><a href="#submenu1">Việt-Anh</a></li>
-                        <li><a href="#submenu2">Anh-Việt</a></li>
-                      
-                  </ul> 	</li>
-                        
+            	
+                        <li><a href="index.php?ten=AV">SÁCH TIẾNG ANH</a> </li>
+                        		
+                        <li><a href="index.php?ten=TKHAO">SÁCH THAM KHẢO</a>	</li>
+               
+                        <li><a href="index.php?ten=TR">TRUYỆN</a> </li>
+                       	
+                        <li class="last"><a href="index.php?ten=TDIEN">TỪ ĐIỂN</a> </li>  
                     </ul>
                 </div>
             </div>
             <div class="sidebar_box"><span class="bottom"></span>
-            	<h3>SÁCH BÁN CHẠY </h3>   
+            	<h3>SÁCH BÁN CHẠY </h3>
                 <div class="content"> 
-                	<div class="bs_box">
-                    	<a href="#"><img src="images/templatemo_image_01.jpg" alt="image" /></a>
-                        <h4><a href="#">Donec nunc nisl</a></h4>
-                        <p class="price">$10</p>
-                        <div class="cleaner"></div>
-                    </div>
-                    <div class="bs_box">
-                    	<a href="#"><img src="images/templatemo_image_01.jpg" alt="image" /></a>
-                        <h4><a href="#">Lorem ipsum dolor sit</a></h4>
-                        <p class="price">$12</p>
-                        <div class="cleaner"></div>
-                    </div>
-                    <div class="bs_box">
-                    	<a href="#"><img src="images/templatemo_image_01.jpg" alt="image" /></a>
-                        <h4><a href="#">Phasellus ut dui</a></h4>
-                        <p class="price">$20</p>
-                        <div class="cleaner"></div>
-                    </div>
-                    <div class="bs_box">
-                    	<a href="#"><img src="images/templatemo_image_01.jpg" alt="image" /></a>
-                        <h4><a href="#">Vestibulum ante</a></h4>
-                        <p class="price">$8</p>
-                        <div class="cleaner"></div>
-                    </div>
+              <?php
+                include_once("DataBase/Sach.php");
+                $sach=new Sach();/*goi class*/
+                $ab=$sach->getSachBestSeller();/*goi ham*/
+                foreach ($ab as $r)
+                {
+                  $hinh=$r["Image"];
+                  $ten=$r["TenSach"];
+                  $giaban=$r["GiaBan"];
+                  $id=$r["MaSach"];
+                  echo " <div class='bs_box'>
+                      <a href='index.php?sanpham=$id'><img src='HinhAnh/$hinh' alt='image' width='66' height='66'/></a>
+                        <h4><a href='index.php?sanpham=$id'>$ten</a></h4>
+                        <p class='price'>$giaban</p>
+                        <div class='cleaner'></div>
+                    </div> ";         
+                }
+              ?>
                 </div>
             </div>
         </div>
@@ -199,21 +169,19 @@ ddsmoothmenu.init({
 			echo "<div id='content' class='float_r'>
         	<div id='slider-wrapper'>
                 <div id='slider' class='nivoSlider'>
-                    <img src='HinhAnh/moi.jpg' alt='' height= '300' width='620' />
-                    <a href='#'><img src='HinhAnh/doremon.jpg' alt='' width='620' height='300' title='This is an example of a caption' /></a>
-                    <img src='HinhAnh/truyen av.jpg' alt='' height='300' width='620' />
-                    <img src='HinhAnh/ng nh anh.jpg' alt='' height='300' width='620' title='#htmlcaption' />
+                    <img src='HinhAnh/bia.jpg' alt='' height= '300' width='620' />
+                    <a href='#'><img src='HinhAnh/moi.jpg' alt='' width='620' height='300' title='This is an example of a caption' /></a>
+                    <img src='HinhAnh/1.jpg' alt='' height='300' width='620' />
+                    <img src='HinhAnh/chen.jpg' alt='' height='300' width='620' title='#htmlcaption' />
                 </div>
                 <div id='htmlcaption' class='nivo-html-caption'>
                     <strong>This</strong> is an example of a <em>HTML</em> caption with <a href='#'>a link</a>.
                 </div>
             </div> <h1>Sản phẩm</h1>";
-			
-			
-           
+				
 			include_once("DataBase/Sach.php");
 			$sach=new Sach();/*goi class*/
-			$ab=$sach->getsach();/*goi ham*/
+			$ab=$sach->getSachMoiNhat();/*goi ham*/
 			foreach ($ab as $r)
 			{
 				$hinh=$r["Image"];

@@ -3,11 +3,15 @@
 Shoes Template 
 http://www.templatemo.com/preview/templatemo_367_shoes 
 -->
+<?php
+ob_start();
+session_start();
+?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Shoes Store - FAQs</title>
+<title>Shoes Store - Check Out</title>
 <meta name="keywords" content="" />
 <meta name="description" content="" />
 <link href="templatemo_style.css" rel="stylesheet" type="text/css" />
@@ -48,79 +52,86 @@ ddsmoothmenu.init({
     	<div id="site_title"><h1><a href="#">Online Book Store</a></h1></div>
         <div id="header_right">
         	<p>
-	        <a href="#">Đăng nhập</a> | <a href="#">Kiểm tra</a> | <a href="#">Đăng kí</a></p>
+	        <?php
+								//neu nguoi dung da dang nhap
+								if(isset($_SESSION["user"]) && ($_SESSION["user"]->MaKH != NULL || $_SESSION["user"]->MaNV != NULL ))
+								{ 
+									//kiem tra ten dang nhap la khach hang hay nhan vien
+									if ($_SESSION["user"]->MaKH != NULL )  $userid=$_SESSION["user"]->MaKH;
+									if ($_SESSION["user"]->MaNV != NULL )  $userid=$_SESSION["user"]->MaNV;
+									include_once("DataProvider.php");
+									$db= new DataProvider();
+									$sql = "select TenDangNhap from taikhoan where MaKH = '$userid' or MaNV = '$userid'";
+									$rs = $db->ExecuteQuery($sql);
+									
+								?>
+                                  <a href="#">Kiểm tra</a> | <a href="Dangnhap.php">
+								 <?php
+								 		echo $_SESSION["user"]->TenDangNhap; 
+										
+								  ?>
+                               </a> |  <a href="xulydangxuat.php">Đăng xuất</a></p>
+                                
+                                 
+								<?php
+                                }
+								else
+								{
+								?>
+                                  <a href="#">Kiểm tra</a> | <a href="Dangnhap.php">Đăng nhập</a> |  <a href="Dangki.php">Đăng kí</a></p>
+                                <?php } ?>
+	     
             
 		</div>
         <div class="cleaner"></div>
     </div> <!-- END of templatemo_header -->
     
-    
-      <div id="templatemo_menubar">
+    <div id="templatemo_menubar">
     	<div id="top_nav" class="ddsmoothmenu">
             <ul>
-                <li><a href="index.html" class="selected">Trang chủ</a></li>
-                <li><a href="sanpham.html">Sản phẩm</a>
+                <li><a href="index.php" class="selected">Trang chủ</a></li>
+                <li><a href="sanpham.php">Sản phẩm</a>
                 </li>
-                <li><a href="thongtincuahang.html">Giới thiệu</a>
+                <li><a href="gioithieu.php">Giới thiệu</a>
                 </li>
-                <li><a href="hoidap.html">Hỏi-đáp</a></li>
-                <li><a href="kiemtradonhang.html">Đơn hàng</a></li>
-                <li><a href="lienhe.html">Liên hệ</a></li>
+                <li><a href="hoidap.php">Hỏi-đáp</a></li>
+                <li><a href="donhang.php">Đơn hàng</a></li>
+                <li><a href="lienhe.php">Liên hệ</a></li>
             </ul>
             <br style="clear: left" />
-        </div> <!-- end of ddsmoothmenu -->  <div id="templatemo_search">
+        </div> <!-- end of ddsmoothmenu -->
+        <div id="templatemo_search">
             <form action="#" method="get">
               <input type="text" value=" " name="keyword" id="keyword" title="keyword" onfocus="clearText(this)" onblur="clearText(this)" class="txt_field" />
               <input type="submit" name="Search" value=" " alt="Search" id="searchbutton" title="Search" class="sub_btn"  />
             </form>
         </div>
-        </div> <!-- END of templatemo_menubar -->
+    </div> <!-- END of templatemo_menubar -->
     
-    <div id="templatemo_main">
+     
+   <div id="templatemo_main">
     	<div id="sidebar" class="float_l">
         	<div class="sidebar_box"><span class="bottom"></span>
             	<h3>DANH MỤC SÁCH</h3>   
                 <div class="content"> 
                 	<ul class="sidebar_list">
-                    	<li class="first"><a href="#">SÁCH GIÁO KHOA</a>
-                         <ul>
-                        <li><a href="#submenu1">Bộ SGK lớp 3</a></li>
-                        <li><a href="#submenu2">Bộ SGK lớp 4</a></li>
-                      
-                  </ul> 	</li>
+                    	<li class="first"><a href="#">SÁCH GIÁO KHOA</a></li>
+                         </li>
                         <li><a href="#">SÁCH TIẾNG ANH</a>
-                         <ul>
-                        <li><a href="#submenu1">Harry Potter</a></li>
-                        <li><a href="#submenu2">Perfect</a></li>
-                      
-                  </ul> 		</li>
-                       <li><a href="#">SÁCH THAM KHẢO</a>
-                        <ul>
-                        <li><a href="#submenu1">Đề thi AV</a></li>
-                        <li><a href="#submenu2">Hướng dẫn làm văn miêu tả</a></li>
-
-                  </ul> 	</li> 
+                        	</li>
+                        <li><a href="#">SÁCH THAM KHẢO</a>
+                        	</li> 
                         <li><a href="#">TRUYỆN</a>
-                        <ul>
-                        <li><a href="#submenu1">Cây bút thần kì</a></li>
-                        <li><a href="#submenu2">Doremon tập 6</a></li>
-                        <li><a href="#submenu3">Bảy bước tới mùa hè </a></li>
-                        <li><a href="#submenu2">Tôi thấy hoa vàng trên cỏ xanh</a></li>
-                      
-                  </ul> 	</li>
+                        	</li>
                         
                         <li class="last"><a href="#">TỪ ĐIỂN</a>
-                        <ul>
-                        <li><a href="#submenu1">Việt-Anh</a></li>
-                        <li><a href="#submenu2">Anh-Việt</a></li>
-                      
-                  </ul> 	</li>
+                        	</li>
                         
                     </ul>
                 </div>
             </div>
             <div class="sidebar_box"><span class="bottom"></span>
-            	<h3>SÁCH BÁN CHẠY </h3>     
+            	<h3>SÁCH BÁN CHẠY </h3>   
                 <div class="content"> 
                 	<div class="bs_box">
                     	<a href="#"><img src="images/templatemo_image_01.jpg" alt="image" /></a>
@@ -149,29 +160,45 @@ ddsmoothmenu.init({
                 </div>
             </div>
         </div>
-        <div id="content" class="float_r faqs">
-        	<h1>Câu hỏi thường gặp</h1>
-            <h5>Làm thế nào để tôi biết nếu đơn hàng của tôi đã được đặt ở đâu?</h5>
-            <p>Bạn sẽ nhận được một email xác nhận đặt hàng của bạn đã được nhận. Nếu bạn không nhận được một email xác nhận, xin vui lòng đăng nhập để xem tình trạng đơn hàng của bạn. Validate <a href="http://validator.w3.org/check?uri=referer" rel="nofollow">XHTML</a> &amp; <a href="http://jigsaw.w3.org/css-validator/check/referer" rel="nofollow">CSS</a>.</p>
+        <div id="content" class="float_r">
+        	<h2>Kiểm tra đơn hàng</h2>
+            <h5><strong>Thông tin hóa đơn</strong></h5>
+            <div class="content_half float_l checkout">
+				Họ tên (phải giống trong thẻ tín dụng của bạn ):  
+                  <input type="text"  style="width:300px;"  />
+                <br />
+                <br />
+              Địa chỉ:
+				<input type="text"  style="width:300px;"  />
+                <br />
+                <br />
+              Thành phố:
+                <input type="text"  style="width:300px;"  />
+                <br />
+                <br />
+                Quốc gia:
+                <input type="text"  style="width:300px;"  />
+            </div>
             
-          <h5>Khi nào đơn hàng của tôi sẽ được vận chuyển?</h5>
-            <p>Xin vui lòng đọc chính sách vận chuyển của chúng tôi. Nhấn vào<a href="#">đây</a></p>
+            <div class="content_half float_r checkout">
+            	E-MAIL
+				<input type="text"  style="width:300px;"  />
+                <br />
+                <br />
+          SĐT<br />
+				<span style="font-size:10px"></span>
+                <input type="text"  style="width:300px;"  />
+            </div>
             
-            <h5>Phương thức thanh tóan nào được chấp nhận?</h5>
-            <p>Thanh toán trực tiếp hay thẻ </p>
-            
-            <h5>Tôi có thể trả lại hoặc trao đổi mua bán của tôi nếu tôi không thích nó?</h5>
-            
-            <p>Xin vui lòng đọc chính sách trao đổi của chúng tôi. Nhấn vào  <a href="#">đây</a></p>
-            
-            <h5>Làm thế nào để tôi biết nếu đặt hàng trực tuyến được đảm bảo?</h5>
-            <p>
-            Bảo vệ thông tin của bạn là ưu tiên hàng đầu cho trang web này. Chúng tôi sử dụng Secure Sockets Layer (SSL) mã hóa số thẻ tín dụng, tên và địa chỉ của bạn, vì vậy chỉ trang web này có thể giải mã thông tin của bạn.
-            </p>
-       
-            <h5>Chính sách bảo mật của bạn là gì?</h5>
-            <p>Trang web này tôn trọng sự riêng tư của bạn và đảm bảo rằng bạn hiểu những thông tin chúng tôi cần để hoàn thành đơn đặt hàng, và những thông tin bạn có thể chọn để chia sẻ với chúng tôi và với các đối tác tiếp thị của chúng tôi. Để biết thông tin đầy đủ về chính sách bảo mật của chúng tôi, vui lòng truy cập của chúng tôi Chính sách bảo mật trang.</a> 
-            </p>
+            <div class="cleaner h50"></div>
+            <h3>GIỎ HÀNG</h3>
+            <h4>TỔNG TIỀN: <strong> </strong></h4>
+			<p><input type="checkbox" />
+			Tôi chấp nhận <a href="#">điều khoản sử dụng</a> của trang web này.</p>
+            <table style="border:1px solid #CCCCCC;" width="100%">
+              
+                
+            </table>
         </div> 
         <div class="cleaner"></div>
     </div> <!-- END of templatemo_main -->

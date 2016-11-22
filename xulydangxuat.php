@@ -1,15 +1,8 @@
 <?php
-ob_start();
 session_start();
-?>
-<meta charset="utf-8">
-<?php
-					{
-						session_destroy();
-						//header("location:index.php");
-					}
+unset($_SESSION['user']);
 ?> 
 <script language="javascript">
-		alert('Bạn đã đăng xuất thành công');
-		window.location="index.php";
-		</script>
+	alert('Bạn đã đăng xuất thành công');
+	window.location="index.php";
+</script>
